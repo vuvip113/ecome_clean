@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "26440347233",
+    "project_id": "muzicbox-25a78",
+    "storage_bucket": "muzicbox-25a78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26440347233:android:a375286d52028f30e00420",
+        "android_client_info": {
+          "package_name": "com.example.ecome_clean"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj7ShiVNMg7oxLfpRDTyQxh46bU-CQnjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
