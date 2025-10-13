@@ -1,6 +1,7 @@
 import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/common/widgets/appbar/app_bar.dart';
 import 'package:ecome_clean/common/widgets/button/basic_app_button.dart';
+import 'package:ecome_clean/data/auth/models/register_params.dart';
 import 'package:ecome_clean/presentation/auth/pages/enter_pass_page.dart';
 import 'package:ecome_clean/presentation/auth/pages/sigin_up_page.dart';
 import 'package:flutter/gestures.dart';
@@ -50,7 +51,10 @@ class SiginInPage extends StatelessWidget {
   Widget _continueButton(BuildContext context) {
     return BasicAppButton(
       onPressed: () {
-        AppNavigator.push(context, EnterPasswordPage());
+        AppNavigator.push(
+          context,
+          EnterPasswordPage(params: RegisterParams(email: _emailCon.text)),
+        );
       },
       title: 'Continue',
     );

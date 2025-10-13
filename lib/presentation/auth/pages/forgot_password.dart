@@ -1,6 +1,13 @@
+import 'package:ecome_clean/common/bloc/button/button_state.dart';
+import 'package:ecome_clean/common/bloc/button/button_state_cubit.dart';
+import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/common/widgets/appbar/app_bar.dart';
-import 'package:ecome_clean/common/widgets/button/basic_app_button.dart';
+import 'package:ecome_clean/common/widgets/button/basic_reactive_button.dart';
+import 'package:ecome_clean/domain/auth/usecase/reset_pass_usecase.dart';
+import 'package:ecome_clean/presentation/auth/pages/password_reset_email.dart';
+import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({super.key});
@@ -13,15 +20,31 @@ class ForgotPasswordPage extends StatelessWidget {
       appBar: const BasicAppbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _siginText(),
-            const SizedBox(height: 20),
-            _emailField(),
-            const SizedBox(height: 20),
-            _continueButton(),
-          ],
+        child: BlocProvider(
+          create: (context) => ButtonStateCubit(),
+          child: BlocListener<ButtonStateCubit, ButtonState>(
+            listener: (context, state) {
+              if (state is ButtonFailureState) {
+                var errorMessage = state.errorMessage;
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(errorMessage)));
+              }
+              if (state is ButtonSuccessState) {
+                AppNavigator.push(context, const PasswordResetEmailPage());
+              }
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _siginText(),
+                const SizedBox(height: 20),
+                _emailField(),
+                const SizedBox(height: 20),
+                _continueButton(),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -44,7 +67,16 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget _continueButton() {
     return Builder(
       builder: (context) {
-        return BasicAppButton(onPressed: () {}, title: 'Continue');
+        return BasicReactiveButton(
+          onPressed: () async {
+            final resetPassUseCase = ResetPassUsecase(sl());
+            await context.read<ButtonStateCubit>().executeUsecase(
+              resetPassUseCase,
+              _emailCon.text,
+            );
+          },
+          title: 'Continue',
+        );
       },
     );
   }
