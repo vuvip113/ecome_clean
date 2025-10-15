@@ -6,10 +6,14 @@ Future<void> init() async {
   //data sources
   sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
   sl.registerLazySingleton<CategoryDataSource>(() => CategoryDataSourceImpl());
+  sl.registerLazySingleton<ProductDataSource>(
+    () => ProductDataSourceImpl(),
+  );
 
   //repos
   sl.registerLazySingleton<AuthRepo>(() => AuthRepoImpl(sl()));
   sl.registerLazySingleton<CategoryRepo>(() => CategoryRepoImpl(sl()));
+  sl.registerLazySingleton<ProductRepo>(() => ProductRepoImpl(sl()));
 
   //use cases
   sl.registerLazySingleton<SignUpUsecase>(() => SignUpUsecase(sl()));
@@ -19,4 +23,5 @@ Future<void> init() async {
   sl.registerLazySingleton<IsLoggedInUseCase>(() => IsLoggedInUseCase(sl()));
   sl.registerLazySingleton<GetUserUsecase>(() => GetUserUsecase(sl()));
   sl.registerLazySingleton<GetCategoryUsecase>(() => GetCategoryUsecase(sl()));
+  sl.registerLazySingleton<GetTopSelling>(() => GetTopSelling(sl()));
 }
