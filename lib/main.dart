@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       // appStarted() chạy ngay → kiểm tra trạng thái đăng nhập.
-      create: (context) => SplashCubit()..appStarted(),
+      create: (context) => SplashCubit(sl())..appStarted(),
       child: MaterialApp(
         theme: AppTheme.appTheme,
         debugShowCheckedModeBanner: false,

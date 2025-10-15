@@ -49,4 +49,24 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<bool> isLoggedIn() async {
+    try {
+      final result = await _authDataSource.isLoggedIn();
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
+
+  @override
+  ResultFuture<UserEntity> getUser() async {
+    try {
+      final result = await _authDataSource.getUser();
+      return Right(result.toEntity());
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }

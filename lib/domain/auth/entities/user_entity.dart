@@ -5,6 +5,7 @@ class UserEntity {
   final String? password;
   final int? gender;
   final String? age;
+  final String? image;
 
   UserEntity(
     this.email,
@@ -13,5 +14,6 @@ class UserEntity {
     this.password,
     this.gender,
     this.age,
+    this.image,
   );
 }

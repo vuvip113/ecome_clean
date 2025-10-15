@@ -39,7 +39,7 @@ class RegisterParams extends Equatable {
   }
 
   UserEntity toEntity() {
-    return UserEntity(email, firstName, lastName, password, gender, age);
+    return UserEntity(email, firstName, lastName, password, gender, age, null);
   }
 
   Map<String, dynamic> toMap() {

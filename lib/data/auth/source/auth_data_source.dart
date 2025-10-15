@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecome_clean/core/errors/exception.dart';
+import 'package:ecome_clean/data/auth/models/user_model.dart';
 import 'package:ecome_clean/domain/auth/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,6 +10,8 @@ abstract class AuthDataSource {
   Future<void> signIn(UserEntity user);
   Future<List<String>> getAges();
   Future<void> resetPassword(String email);
+  Future<bool> isLoggedIn();
+  Future<UserModel> getUser();
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
@@ -91,6 +94,41 @@ class AuthDataSourceImpl implements AuthDataSource {
         errorMessage = 'An undefined Error happened.';
       }
       throw ServerException(massage: errorMessage, statusCode: 404);
+    }
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return Future.value(true);
+    } else {
+      return Future.value(false);
+    }
+  }
+
+  @override
+  Future<UserModel> getUser() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(user?.uid)
+          .get();
+
+      final data = snapshot.data();
+      if (data == null) {
+        throw const ServerException(
+          massage: 'User data not found',
+          statusCode: 404,
+        );
+      }
+
+      final userModel = UserModel.fromMap(data);
+
+      return userModel;
+    } catch (e) {
+      throw ServerException(massage: e.toString(), statusCode: 500);
     }
   }
 }

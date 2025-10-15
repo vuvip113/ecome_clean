@@ -6,6 +6,7 @@ import 'package:ecome_clean/common/widgets/button/basic_reactive_button.dart';
 import 'package:ecome_clean/data/auth/models/register_params.dart';
 import 'package:ecome_clean/domain/auth/usecase/sign_in_usecase.dart';
 import 'package:ecome_clean/presentation/auth/pages/forgot_password.dart';
+import 'package:ecome_clean/presentation/home/pages/home_page.dart';
 import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class EnterPasswordPage extends StatelessWidget {
               }
               if (state is ButtonSuccessState) {
                 // Handle success state if needed
+                AppNavigator.pushAndRemove(context, const HomePage());
               }
             },
             child: Column(
