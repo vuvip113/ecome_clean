@@ -1,6 +1,8 @@
 import 'package:ecome_clean/common/bloc/categories/categories_display_cubit.dart';
 import 'package:ecome_clean/common/helper/images/image_display.dart';
+import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/domain/category/entities/category.dart';
+import 'package:ecome_clean/presentation/all_categories/pages/all_categories.dart';
 import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,9 @@ class Categories extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              AppNavigator.push(context, const AllCategoriesPage());
+            },
             child: const Text(
               'See All',
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),

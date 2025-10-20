@@ -1,4 +1,3 @@
-import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/domain/product/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +10,10 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("🟩 ProductCard build được gọi");
-    print("🟩 productEntity: ${productEntity.title}");
-    print("🟩 images: ${productEntity.images}");
-    print("🟩 images length: ${productEntity.images.length}");
+    // print("🟩 ProductCard build được gọi");
+    // print("🟩 productEntity: ${productEntity.title}");
+    // print("🟩 images: ${productEntity.images}");
+    // print("🟩 images length: ${productEntity.images.length}");
     return GestureDetector(
       onTap: () {},
       child: Container(

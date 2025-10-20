@@ -9,7 +9,7 @@ class ButtonStateCubit extends Cubit<ButtonState> {
 
   /// Gọi usecase có params
   Future<void> executeUsecase<Type, Params>(
-    UsecaseWithPatams<Type, Params> usecase,
+    UsecaseWithParams<Type, Params> usecase,
     Params params,
   ) async {
     emit(ButtonLoadingState());

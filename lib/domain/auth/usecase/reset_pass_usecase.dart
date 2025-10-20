@@ -2,7 +2,7 @@ import 'package:ecome_clean/core/usecase/usecase.dart';
 import 'package:ecome_clean/core/utils/constants/tydefs.dart';
 import 'package:ecome_clean/domain/auth/repo/auth_repo.dart';
 
-class ResetPassUsecase implements UsecaseWithPatams<void, String> {
+class ResetPassUsecase implements UsecaseWithParams<void, String> {
   const ResetPassUsecase(this._repo);
 
   final AuthRepo _repo;

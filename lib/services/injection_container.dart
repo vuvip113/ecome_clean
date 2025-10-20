@@ -14,6 +14,9 @@ import 'package:ecome_clean/domain/auth/usecase/sign_up_usecase.dart';
 import 'package:ecome_clean/domain/category/repo/category_repo.dart';
 import 'package:ecome_clean/domain/category/usecase/get_category_usecase.dart';
 import 'package:ecome_clean/domain/product/repo/product_repo.dart';
+import 'package:ecome_clean/domain/product/usecases/get_new_in.dart';
+import 'package:ecome_clean/domain/product/usecases/get_products_by_category_by_id.dart';
+import 'package:ecome_clean/domain/product/usecases/get_products_by_title.dart';
 import 'package:ecome_clean/domain/product/usecases/get_top_selling.dart';
 import 'package:get_it/get_it.dart';
 

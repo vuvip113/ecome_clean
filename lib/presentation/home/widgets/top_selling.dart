@@ -1,6 +1,7 @@
 import 'package:ecome_clean/common/widgets/product/product_card.dart';
 import 'package:ecome_clean/domain/product/entities/product_entity.dart';
-import 'package:ecome_clean/presentation/home/bloc/cubit/top_selling_display_cubit.dart';
+import 'package:ecome_clean/common/bloc/product/products_display_cubit.dart';
+import 'package:ecome_clean/domain/product/usecases/get_top_selling.dart';
 import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,13 +12,14 @@ class TopSelling extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TopSellingDisplayCubit(sl())..displayTopSelling(),
-      child: BlocBuilder<TopSellingDisplayCubit, TopSellingDisplayState>(
+      create: (context) =>
+          ProductsDisplayCubit(sl<GetTopSelling>())..displayProducts(),
+      child: BlocBuilder<ProductsDisplayCubit, ProductsDisplayState>(
         builder: (context, state) {
-          if (state is TopSellingDisplayLoading) {
+          if (state is ProductsDisplayLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is TopSellingDisplayLoaded) {
+          if (state is ProductsDisplayLoaded) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,

@@ -3,7 +3,7 @@ import 'package:ecome_clean/core/utils/constants/tydefs.dart';
 import 'package:ecome_clean/data/auth/models/register_params.dart';
 import 'package:ecome_clean/domain/auth/repo/auth_repo.dart';
 
-class SignInUsecase implements UsecaseWithPatams<void, RegisterParams> {
+class SignInUsecase implements UsecaseWithParams<void, RegisterParams> {
   const SignInUsecase(this._repo);
 
   final AuthRepo _repo;

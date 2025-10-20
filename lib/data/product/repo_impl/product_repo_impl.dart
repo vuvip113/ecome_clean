@@ -20,4 +20,36 @@ class ProductRepoImpl implements ProductRepo {
       return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
     }
   }
+
+  @override
+  ResultFuture<List<ProductEntity>> getNewIn() async {
+    try {
+      final products = await dataSource.getNewIn();
+      return Right(products);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  ResultFuture<List<ProductEntity>> getProductsByCategoryId(
+    String categoryId,
+  ) async {
+    try {
+      final products = await dataSource.getProductsByCategoryId(categoryId);
+      return Right(products);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    }
+  }
+
+  @override
+  ResultFuture<List<ProductEntity>> getProductsByTitle(String title) async {
+    try {
+      final products = await dataSource.getProductsByTitle(title);
+      return Right(products);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    }
+  }
 }
