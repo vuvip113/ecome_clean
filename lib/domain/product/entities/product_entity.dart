@@ -8,9 +8,8 @@ class ProductEntity extends Equatable {
   final DateTime createdDate;
   final int gender; // 1 = Nam, 2 = Nữ, 3 = Unisex,...
   final List<String> images;
-  final String
-  price; // Dạng string vì có thể chứa ký tự hoặc định dạng đặc biệt
-  final String discountedPrice; // Giá đã giảm
+  final double price; // Giá gốc
+  final double discountedPrice; // Giá đã giảm
   final int salesNumber;
   final List<String> sizes;
 
@@ -45,11 +44,11 @@ class ProductEntity extends Equatable {
 }
 
 class ProductColor extends Equatable {
-  final String hexCode;
   final String title;
+  final List<int> rgb;
 
-  const ProductColor({required this.hexCode, required this.title});
+  const ProductColor({required this.rgb, required this.title});
 
   @override
-  List<Object?> get props => [hexCode, title];
+  List<Object?> get props => [rgb, title];
 }

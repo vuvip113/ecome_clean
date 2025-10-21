@@ -22,15 +22,14 @@ class ProductModel extends ProductEntity {
       productId: map['productId'] ?? '',
       title: map['title'] ?? '',
       categoryId: map['categoryId'] ?? '',
-      colors: (map['colors'] as List<dynamic>?)
-              ?.map((e) => ProductColorModel.fromMap(e))
-              .toList() ??
-          [],
+      colors: (map['colors'] as List<dynamic>? ?? [])
+          .map((e) => ProductColorModel.fromMap(Map<String, dynamic>.from(e)))
+          .toList(),
       createdDate: _toDate(map['createdDate']),
-      gender: map['gender'] ?? 0,
+      gender: map['gender'] ?? 3,
       images: List<String>.from(map['images'] ?? []),
-      price: map['price']?.toString() ?? '0',
-      discountedPrice: map['discountedPrice']?.toString() ?? '0',
+      price: _toDouble(map['price']),
+      discountedPrice: _toDouble(map['discountedPrice']),
       salesNumber: map['salesNumber'] ?? 0,
       sizes: List<String>.from(map['sizes'] ?? []),
     );
@@ -42,7 +41,10 @@ class ProductModel extends ProductEntity {
       'productId': productId,
       'title': title,
       'categoryId': categoryId,
-      'colors': colors.map((c) => (c as ProductColorModel).toMap()).toList(),
+      'colors': colors.map((c) {
+        if (c is ProductColorModel) return c.toMap();
+        return ProductColorModel(title: c.title, rgb: c.rgb).toMap();
+      }).toList(),
       'createdDate': Timestamp.fromDate(createdDate),
       'gender': gender,
       'images': images,
@@ -59,26 +61,28 @@ class ProductModel extends ProductEntity {
     if (value is String) return DateTime.tryParse(value) ?? DateTime.now();
     return DateTime.now();
   }
+
+  /// 🔹 Helper: Convert dynamic → double
+  static double _toDouble(dynamic value) {
+    if (value == null) return 0.0;
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value) ?? 0.0;
+    return 0.0;
+  }
 }
 
-/// 🔸 Model cho ProductColor
+/// 🔸 Model con cho ProductColor (đồng bộ với Entity)
 class ProductColorModel extends ProductColor {
-  const ProductColorModel({
-    required super.hexCode,
-    required super.title,
-  });
+  const ProductColorModel({required super.title, required super.rgb});
 
   factory ProductColorModel.fromMap(Map<String, dynamic> map) {
     return ProductColorModel(
-      hexCode: map['hexCode'] ?? '',
       title: map['title'] ?? '',
+      rgb: List<int>.from(map['rgb'] ?? [0, 0, 0]),
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'hexCode': hexCode,
-      'title': title,
-    };
+    return {'title': title, 'rgb': rgb};
   }
 }

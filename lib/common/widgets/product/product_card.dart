@@ -1,4 +1,6 @@
+import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/domain/product/entities/product_entity.dart';
+import 'package:ecome_clean/presentation/product_detail/pages/product_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
@@ -15,7 +17,12 @@ class ProductCard extends StatelessWidget {
     // print("🟩 images: ${productEntity.images}");
     // print("🟩 images length: ${productEntity.images.length}");
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        AppNavigator.push(
+          context,
+          ProductDetailPage(productEntity: productEntity),
+        );
+      },
       child: Container(
         width: 180,
         decoration: BoxDecoration(
