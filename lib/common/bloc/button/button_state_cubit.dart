@@ -37,4 +37,6 @@ class ButtonStateCubit extends Cubit<ButtonState> {
   void reset() {
     emit(ButtonInitialState());
   }
+
+  void showLoading() => emit(ButtonLoadingState());
 }
