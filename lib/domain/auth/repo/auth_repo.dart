@@ -9,4 +9,6 @@ abstract class AuthRepo {
   ResultFuture<void> resetPassword(String email);
   ResultFuture<bool> isLoggedIn();
   ResultFuture<UserEntity> getUser();
+
+  ResultFuture<void> signOut();
 }

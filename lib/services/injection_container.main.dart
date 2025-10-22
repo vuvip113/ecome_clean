@@ -23,6 +23,7 @@ Future<void> init() async {
   sl.registerLazySingleton<SignInUsecase>(() => SignInUsecase(sl()));
   sl.registerLazySingleton<ResetPassUsecase>(() => ResetPassUsecase(sl()));
   sl.registerLazySingleton<IsLoggedInUseCase>(() => IsLoggedInUseCase(sl()));
+  sl.registerLazySingleton<SignOut>(() => SignOut(sl()));
   sl.registerLazySingleton<GetUserUsecase>(() => GetUserUsecase(sl()));
   sl.registerLazySingleton<GetCategoryUsecase>(() => GetCategoryUsecase(sl()));
 

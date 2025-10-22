@@ -12,6 +12,7 @@ abstract class AuthDataSource {
   Future<void> resetPassword(String email);
   Future<bool> isLoggedIn();
   Future<UserModel> getUser();
+  Future<void> signOut();
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
@@ -129,6 +130,18 @@ class AuthDataSourceImpl implements AuthDataSource {
       return userModel;
     } catch (e) {
       throw ServerException(massage: e.toString(), statusCode: 500);
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(
+        massage: e.message ?? 'Failed to sign out.',
+        statusCode: 500,
+      );
     }
   }
 }

@@ -12,6 +12,7 @@ import 'package:ecome_clean/domain/auth/usecase/get_user_usecase.dart';
 import 'package:ecome_clean/domain/auth/usecase/is_logged_in.dart';
 import 'package:ecome_clean/domain/auth/usecase/reset_pass_usecase.dart';
 import 'package:ecome_clean/domain/auth/usecase/sign_in_usecase.dart';
+import 'package:ecome_clean/domain/auth/usecase/sign_out.dart';
 import 'package:ecome_clean/domain/auth/usecase/sign_up_usecase.dart';
 import 'package:ecome_clean/domain/category/repo/category_repo.dart';
 import 'package:ecome_clean/domain/category/usecase/get_category_usecase.dart';

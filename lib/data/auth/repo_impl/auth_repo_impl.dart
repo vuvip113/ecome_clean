@@ -69,4 +69,14 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure.fromException(e));
     }
   }
+
+  @override
+  ResultFuture<void> signOut() async {
+    try {
+      await _authDataSource.signOut();
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure.fromException(e));
+    }
+  }
 }
