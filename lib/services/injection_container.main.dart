@@ -36,4 +36,5 @@ Future<void> init() async {
   sl.registerLazySingleton<GetProductsByTitle>(() => GetProductsByTitle(sl()));
 
   sl.registerLazySingleton<AddToCart>(() => AddToCart(sl()));
+  sl.registerLazySingleton<GetCartProducts>(() => GetCartProducts(sl()));
 }

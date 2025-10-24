@@ -28,4 +28,23 @@ class OrderRepoImpl implements OrderRepo {
       );
     }
   }
+
+  @override
+  ResultFuture<List<OrderEntity>> getCartProducts() async {
+    try {
+      final List<OrderModel> models = await _orderDataSource.getCartProducts();
+
+      final List<OrderEntity> entities = models
+          .map((model) => model.toEntity())
+          .toList();
+
+      return Right(entities);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    } catch (e) {
+      return Left(
+        ServerFailure(message: 'Unexpected error: $e', statusCode: 500),
+      );
+    }
+  }
 }

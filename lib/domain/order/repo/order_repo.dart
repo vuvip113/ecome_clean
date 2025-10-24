@@ -3,4 +3,5 @@ import 'package:ecome_clean/domain/order/entities/order_entity.dart';
 
 abstract class OrderRepo {
   ResultFuture<void> addToCart(OrderEntity order);
+  ResultFuture<List<OrderEntity>> getCartProducts();
 }

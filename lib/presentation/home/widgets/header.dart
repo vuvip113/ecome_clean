@@ -4,6 +4,7 @@ import 'package:ecome_clean/core/configs/assets/app_vectors.dart';
 import 'package:ecome_clean/core/configs/theme/app_colors.dart';
 import 'package:ecome_clean/domain/auth/entities/user_entity.dart';
 import 'package:ecome_clean/presentation/auth/pages/sigin_in_page.dart';
+import 'package:ecome_clean/presentation/cart/pages/cart.dart';
 import 'package:ecome_clean/presentation/home/bloc/user_info_display_cubit.dart';
 import 'package:ecome_clean/presentation/auth/bloc/sign_out_cubit.dart';
 import 'package:ecome_clean/services/injection_container.dart';
@@ -98,7 +99,9 @@ class Header extends StatelessWidget {
 
   Widget _card(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        AppNavigator.push(context, const CartPage());
+      },
       child: Container(
         height: 40,
         width: 40,
