@@ -1,7 +1,9 @@
 import 'package:ecome_clean/common/helper/images/image_display.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/presentation/cart/cubit/cart_products_display_cubit.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
 
@@ -140,7 +142,11 @@ class ProductOrderedCard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    await context
+                        .read<CartProductsDisplayCubit>()
+                        .removeProduct(productOrderedEntity);
+                  },
                   child: Container(
                     height: 23,
                     width: 23,

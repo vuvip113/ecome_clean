@@ -3,8 +3,10 @@ import 'package:ecome_clean/core/errors/exception.dart';
 import 'package:ecome_clean/core/errors/failures.dart';
 import 'package:ecome_clean/core/utils/constants/tydefs.dart';
 import 'package:ecome_clean/data/order/models/order_model.dart';
+import 'package:ecome_clean/data/order/models/order_registration_model.dart';
 import 'package:ecome_clean/data/order/source/order_data_source.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/order_registration.dart';
 import 'package:ecome_clean/domain/order/repo/order_repo.dart';
 
 class OrderRepoImpl implements OrderRepo {
@@ -47,4 +49,37 @@ class OrderRepoImpl implements OrderRepo {
       );
     }
   }
+
+  @override
+  ResultFuture<void> removeFromCart(String orderId) async {
+    try {
+      await _orderDataSource.removeFromCart(orderId);
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    } catch (e) {
+      return Left(
+        ServerFailure(message: 'Unexpected error: $e', statusCode: 500),
+      );
+    }
+  }
+  
+  @override
+  ResultFuture<void> orderRegistration(OrderRegistration order)async {
+    try {
+      final orderModel = OrderRegistrationModel.fromEntity(order);
+
+      await _orderDataSource.orderRegistration(orderModel);
+
+      return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    } catch (e) {
+      return Left(
+        ServerFailure(message: 'Unexpected error: $e', statusCode: 500),
+      );
+    }
+  }
+
+ 
 }

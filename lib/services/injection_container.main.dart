@@ -37,4 +37,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton<AddToCart>(() => AddToCart(sl()));
   sl.registerLazySingleton<GetCartProducts>(() => GetCartProducts(sl()));
+  sl.registerLazySingleton<RemoveFromCart>(() => RemoveFromCart(sl()));
+  sl.registerLazySingleton<OrderRegistrationUsecase>(
+    () => OrderRegistrationUsecase(sl()),
+  );
 }

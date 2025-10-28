@@ -1,6 +1,7 @@
 import 'package:ecome_clean/common/widgets/appbar/app_bar.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
 import 'package:ecome_clean/presentation/cart/cubit/cart_products_display_cubit.dart';
+import 'package:ecome_clean/presentation/cart/widgets/checkout.dart';
 import 'package:ecome_clean/presentation/cart/widgets/product_ordered_card.dart';
 import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,15 @@ class CartPage extends StatelessWidget {
             if (state is CartProductsDisplayLoaded) {
               return state.products.isEmpty
                   ? Center(child: _cartIsEmpty())
-                  : Stack(children: [_products(state.products)]);
+                  : Stack(
+                      children: [
+                        _products(state.products),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Checkout(products: state.products),
+                        ),
+                      ],
+                    );
             }
             if (state is CartProductsDisplayError) {
               return Center(child: Text(state.message));
