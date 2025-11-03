@@ -1,7 +1,6 @@
 import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/presentation/auth/bloc/sign_out_cubit.dart';
 import 'package:ecome_clean/presentation/auth/pages/sigin_in_page.dart';
-import 'package:ecome_clean/presentation/product_detail/bloc/favorite_icon_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
