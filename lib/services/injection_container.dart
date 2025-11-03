@@ -22,10 +22,13 @@ import 'package:ecome_clean/domain/order/usecase/get_cart_products.dart';
 import 'package:ecome_clean/domain/order/usecase/order_registration_usecase.dart';
 import 'package:ecome_clean/domain/order/usecase/remove_from_cart.dart';
 import 'package:ecome_clean/domain/product/repo/product_repo.dart';
+import 'package:ecome_clean/domain/product/usecases/add_or_remove_favorite_product.dart';
+import 'package:ecome_clean/domain/product/usecases/get_favorties_products.dart';
 import 'package:ecome_clean/domain/product/usecases/get_new_in.dart';
 import 'package:ecome_clean/domain/product/usecases/get_products_by_category_by_id.dart';
 import 'package:ecome_clean/domain/product/usecases/get_products_by_title.dart';
 import 'package:ecome_clean/domain/product/usecases/get_top_selling.dart';
+import 'package:ecome_clean/domain/product/usecases/is_favorite.dart';
 import 'package:get_it/get_it.dart';
 
 part 'injection_container.main.dart';

@@ -16,6 +16,25 @@ class ProductModel extends ProductEntity {
     required super.sizes,
   });
 
+  /// 🔹 Entity → Model (dùng cho Repository)
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      productId: entity.productId,
+      title: entity.title,
+      categoryId: entity.categoryId,
+      colors: entity.colors
+          .map((c) => ProductColorModel(title: c.title, rgb: c.rgb))
+          .toList(),
+      createdDate: entity.createdDate,
+      gender: entity.gender,
+      images: List<String>.from(entity.images),
+      price: entity.price,
+      discountedPrice: entity.discountedPrice,
+      salesNumber: entity.salesNumber,
+      sizes: List<String>.from(entity.sizes),
+    );
+  }
+
   /// 🔹 Firestore → Model
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(

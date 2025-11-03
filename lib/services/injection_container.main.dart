@@ -41,4 +41,9 @@ Future<void> init() async {
   sl.registerLazySingleton<OrderRegistrationUsecase>(
     () => OrderRegistrationUsecase(sl()),
   );
+  sl.registerLazySingleton<AddOrRemoveFavoriteProductUseCase>(
+    () => AddOrRemoveFavoriteProductUseCase(sl()),
+  );
+  sl.registerLazySingleton<IsFavoriteUseCase>(() => IsFavoriteUseCase(sl()));
+  sl.registerLazySingleton<GetFavortiesProductsUseCase>(() => GetFavortiesProductsUseCase(sl()));
 }

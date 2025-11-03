@@ -6,4 +6,9 @@ abstract class ProductRepo {
   ResultFuture<List<ProductEntity>> getNewIn();
   ResultFuture<List<ProductEntity>> getProductsByCategoryId(String categoryId);
   ResultFuture<List<ProductEntity>> getProductsByTitle(String title);
+  ResultFuture<List<ProductEntity>> addOrRemoveFavProduct(
+    ProductEntity product,
+  );
+  ResultFuture<bool> isFav(String productId);
+  ResultFuture<List<ProductEntity>> getFavoriteProducts();
 }
