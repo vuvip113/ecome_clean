@@ -3,10 +3,9 @@ import 'package:ecome_clean/core/configs/assets/app_images.dart';
 import 'package:ecome_clean/core/configs/assets/app_vectors.dart';
 import 'package:ecome_clean/core/configs/theme/app_colors.dart';
 import 'package:ecome_clean/domain/auth/entities/user_entity.dart';
-import 'package:ecome_clean/presentation/auth/pages/sigin_in_page.dart';
 import 'package:ecome_clean/presentation/cart/pages/cart.dart';
 import 'package:ecome_clean/presentation/home/bloc/user_info_display_cubit.dart';
-import 'package:ecome_clean/presentation/auth/bloc/sign_out_cubit.dart';
+import 'package:ecome_clean/presentation/settings/pages/settings.dart';
 import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +21,6 @@ class Header extends StatelessWidget {
         BlocProvider(
           create: (context) => UserInfoDisplayCubit(sl())..displayUserInfo(),
         ),
-        BlocProvider(create: (context) => SignOutCubit(sl())),
       ],
       child: Padding(
         padding: const EdgeInsets.only(top: 40, right: 16, left: 16),
@@ -49,32 +47,21 @@ class Header extends StatelessWidget {
   }
 
   Widget _profileImage(UserEntity user, BuildContext context) {
-    return BlocListener<SignOutCubit, SignOutState>(
-      listener: (context, state) {
-        if (state is SignOutSuccess) {
-          AppNavigator.pushAndRemove(context, SiginInPage());
-        } else if (state is SignOutError) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
-        }
+    return GestureDetector(
+      onTap: () {
+        AppNavigator.push(context, const SettingsPage());
       },
-      child: GestureDetector(
-        onTap: () {
-          context.read<SignOutCubit>().signOut();
-        },
-        child: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: (user.image != null && user.image!.isNotEmpty)
-                  ? NetworkImage(user.image!)
-                  : const AssetImage(AppImages.profile) as ImageProvider,
-              fit: BoxFit.cover,
-            ),
-            shape: BoxShape.circle,
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: (user.image != null && user.image!.isNotEmpty)
+                ? NetworkImage(user.image!)
+                : const AssetImage(AppImages.profile) as ImageProvider,
+            fit: BoxFit.cover,
           ),
+          shape: BoxShape.circle,
         ),
       ),
     );

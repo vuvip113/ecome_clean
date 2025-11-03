@@ -1,68 +1,37 @@
+import 'package:ecome_clean/domain/order/entities/order_status_entity.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class OrderEntity extends Equatable {
-  final String? cartItemId; // 🔹 ID của document trong Firestore
-  final String productId;
-  final String productTitle;
-  final int productQuantity;
-  final String productColor;
-  final String productSize;
-  final double productPrice;
-  final double totalPrice;
-  final String productImage;
+  final String code;
   final DateTime createdDate;
+  final int itemCount;
+  final String orderId;
+  final List<OrderStatusEntity> orderStatus;
+  final List<ProductOrderEntity> products;
+  final String shippingAddress;
+  final double totalAmount;
 
   const OrderEntity({
-    this.cartItemId, // có thể null khi thêm mới
-    required this.productId,
-    required this.productTitle,
-    required this.productQuantity,
-    required this.productColor,
-    required this.productSize,
-    required this.productPrice,
-    required this.totalPrice,
-    required this.productImage,
+    required this.code,
     required this.createdDate,
+    required this.itemCount,
+    required this.orderId,
+    required this.orderStatus,
+    required this.products,
+    required this.shippingAddress,
+    required this.totalAmount,
   });
 
   @override
   List<Object?> get props => [
-    cartItemId,
-    productId,
-    productTitle,
-    productQuantity,
-    productColor,
-    productSize,
-    productPrice,
-    totalPrice,
-    productImage,
+    code,
     createdDate,
+    itemCount,
+    orderId,
+    orderStatus,
+    products,
+    shippingAddress,
+    totalAmount,
   ];
-
-  /// 🔹 Copy để tạo bản mới (hữu ích khi cập nhật giỏ hàng)
-  OrderEntity copyWith({
-    String? cartItemId,
-    String? productId,
-    String? productTitle,
-    int? productQuantity,
-    String? productColor,
-    String? productSize,
-    double? productPrice,
-    double? totalPrice,
-    String? productImage,
-    DateTime? createdDate,
-  }) {
-    return OrderEntity(
-      cartItemId: cartItemId ?? this.cartItemId,
-      productId: productId ?? this.productId,
-      productTitle: productTitle ?? this.productTitle,
-      productQuantity: productQuantity ?? this.productQuantity,
-      productColor: productColor ?? this.productColor,
-      productSize: productSize ?? this.productSize,
-      productPrice: productPrice ?? this.productPrice,
-      totalPrice: totalPrice ?? this.totalPrice,
-      productImage: productImage ?? this.productImage,
-      createdDate: createdDate ?? this.createdDate,
-    );
-  }
 }

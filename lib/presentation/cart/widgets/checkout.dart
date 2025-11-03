@@ -2,12 +2,12 @@ import 'package:ecome_clean/common/helper/cart/cart.dart';
 import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/common/widgets/button/basic_app_button.dart';
 import 'package:ecome_clean/core/configs/theme/app_colors.dart';
-import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:ecome_clean/presentation/cart/pages/checkout.dart';
 import 'package:flutter/material.dart';
 
 class Checkout extends StatelessWidget {
-  final List<OrderEntity> products;
+  final List<ProductOrderEntity> products;
   const Checkout({required this.products, super.key});
 
   @override

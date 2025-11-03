@@ -1,5 +1,5 @@
 import 'package:ecome_clean/common/helper/images/image_display.dart';
-import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:ecome_clean/presentation/cart/cubit/cart_products_display_cubit.dart';
 
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/configs/theme/app_colors.dart';
 
 class ProductOrderedCard extends StatelessWidget {
-  final OrderEntity productOrderedEntity;
+  final ProductOrderEntity productOrderedEntity;
   const ProductOrderedCard({required this.productOrderedEntity, super.key});
 
   @override

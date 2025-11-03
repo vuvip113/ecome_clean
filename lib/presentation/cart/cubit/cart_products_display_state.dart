@@ -12,7 +12,7 @@ final class CartProductsDisplayInitial extends CartProductsDisplayState {}
 final class CartProductsDisplayLoading extends CartProductsDisplayState {}
 
 final class CartProductsDisplayLoaded extends CartProductsDisplayState {
-  final List<OrderEntity> products;
+  final List<ProductOrderEntity> products;
 
   const CartProductsDisplayLoaded(this.products);
 

@@ -1,5 +1,5 @@
 import 'package:ecome_clean/common/widgets/appbar/app_bar.dart';
-import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:ecome_clean/presentation/cart/cubit/cart_products_display_cubit.dart';
 import 'package:ecome_clean/presentation/cart/widgets/checkout.dart';
 import 'package:ecome_clean/presentation/cart/widgets/product_ordered_card.dart';
@@ -47,7 +47,7 @@ class CartPage extends StatelessWidget {
     );
   }
 
-  Widget _products(List<OrderEntity> products) {
+  Widget _products(List<ProductOrderEntity> products) {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {

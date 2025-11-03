@@ -1,6 +1,6 @@
 import 'package:ecome_clean/common/helper/product/product_price.dart';
 import 'package:ecome_clean/common/widgets/button/basic_reactive_button.dart';
-import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:ecome_clean/domain/order/usecase/add_to_cart.dart';
 import 'package:ecome_clean/domain/product/entities/product_entity.dart';
 import 'package:ecome_clean/presentation/product_detail/bloc/product_color_selection_cubit.dart';
@@ -23,7 +23,7 @@ class AddToBag extends StatelessWidget {
           final addToCart = sl<AddToCart>();
           final quantity = context.read<ProductQuantityCubit>().state;
 
-          final order = OrderEntity(
+          final order = ProductOrderEntity(
             productId: productEntity.productId,
             productTitle: productEntity.title,
             productQuantity: quantity,
@@ -40,6 +40,7 @@ class AddToBag extends StatelessWidget {
                 quantity,
             productImage: productEntity.images[0],
             createdDate: DateTime.now(),
+            cartItemId: '',
           );
           final result = await addToCart(order);
           result.fold(

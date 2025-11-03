@@ -3,7 +3,7 @@ import 'package:ecome_clean/common/helper/cart/cart.dart';
 import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/common/widgets/button/basic_reactive_button.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
-import 'package:ecome_clean/domain/order/entities/order_registration.dart';
+import 'package:ecome_clean/domain/order/entities/product_order_entity.dart';
 import 'package:ecome_clean/domain/order/usecase/order_registration_usecase.dart';
 import 'package:ecome_clean/presentation/cart/pages/order_placed.dart';
 import 'package:ecome_clean/services/injection_container.dart';
@@ -13,7 +13,7 @@ import '../../../common/bloc/button/button_state.dart';
 import '../../../common/widgets/appbar/app_bar.dart';
 
 class CheckOutPage extends StatelessWidget {
-  final List<OrderEntity> products;
+  final List<ProductOrderEntity> products;
   CheckOutPage({required this.products, super.key});
 
   final TextEditingController _addressCon = TextEditingController();
@@ -73,7 +73,7 @@ class CheckOutPage extends StatelessWidget {
                       onPressed: () {
                         context.read<ButtonStateCubit>().executeUsecase(
                           OrderRegistrationUsecase(sl()),
-                          OrderRegistration(
+                          OrderEntity(
                             products: products,
                             createdDate: DateTime.now(),
                             itemCount: products.length,
@@ -82,6 +82,8 @@ class CheckOutPage extends StatelessWidget {
                             ),
                             shippingAddress: _addressCon.text,
                             orderId: '',
+                            code: '',
+                            orderStatus: const [],
                           ),
                         );
                       },

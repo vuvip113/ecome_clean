@@ -1,16 +1,15 @@
 import 'package:ecome_clean/core/usecase/usecase.dart';
 import 'package:ecome_clean/core/utils/constants/tydefs.dart';
-import 'package:ecome_clean/domain/order/entities/order_registration.dart';
+import 'package:ecome_clean/domain/order/entities/order_entity.dart';
 import 'package:ecome_clean/domain/order/repo/order_repo.dart';
 
-class OrderRegistrationUsecase
-    implements UsecaseWithParams<void, OrderRegistration> {
+class OrderRegistrationUsecase implements UsecaseWithParams<void, OrderEntity> {
   const OrderRegistrationUsecase(this._repo);
 
   final OrderRepo _repo;
 
   @override
-  ResultFuture<void> call(OrderRegistration order) async {
+  ResultFuture<void> call(OrderEntity order) async {
     return _repo.orderRegistration(order);
   }
 }
