@@ -45,5 +45,8 @@ Future<void> init() async {
     () => AddOrRemoveFavoriteProductUseCase(sl()),
   );
   sl.registerLazySingleton<IsFavoriteUseCase>(() => IsFavoriteUseCase(sl()));
-  sl.registerLazySingleton<GetFavortiesProductsUseCase>(() => GetFavortiesProductsUseCase(sl()));
+  sl.registerLazySingleton<GetFavortiesProductsUseCase>(
+    () => GetFavortiesProductsUseCase(sl()),
+  );
+  sl.registerLazySingleton<GetOders>(() => GetOders(sl()));
 }

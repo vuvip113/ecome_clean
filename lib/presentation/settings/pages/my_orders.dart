@@ -1,6 +1,11 @@
+import 'package:ecome_clean/common/helper/navigator/app_navigator.dart';
 import 'package:ecome_clean/common/widgets/appbar/app_bar.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/presentation/settings/bloc/orders_display_cubit.dart';
+import 'package:ecome_clean/presentation/settings/pages/order_detail.dart';
+import 'package:ecome_clean/services/injection_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
 
@@ -11,7 +16,23 @@ class MyOrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const BasicAppbar(title: Text('My Orders')),
-      body: Container(),
+      body: BlocProvider(
+        create: (context) => OrdersDisplayCubit(sl())..loadOrders(),
+        child: BlocBuilder<OrdersDisplayCubit, OrdersDisplayState>(
+          builder: (context, state) {
+            if (state is OrdersDisplayLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is OrdersDisplayLoaded) {
+              return _orders(state.orders);
+            }
+            if (state is OrdersDisplayError) {
+              return Center(child: Text(state.message));
+            }
+            return Container();
+          },
+        ),
+      ),
     );
   }
 
@@ -20,7 +41,12 @@ class MyOrdersPage extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            AppNavigator.push(
+              context,
+              OrderDetailPage(orderEntity: orders[index]),
+            );
+          },
           child: Container(
             height: 70,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -28,27 +54,27 @@ class MyOrdersPage extends StatelessWidget {
               color: AppColors.secondBackground,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Icon(Icons.receipt_rounded),
-                    SizedBox(width: 20),
+                    const Icon(Icons.receipt_rounded),
+                    const SizedBox(width: 20),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Order 123123',
-                          style: TextStyle(
+                          'Order #${orders[index].code.substring(orders[index].code.length - 6)}',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
                           ),
                         ),
                         Text(
-                          '5 item',
-                          style: TextStyle(
+                          '${orders[index].itemCount} item',
+                          style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
                             color: Colors.grey,
@@ -58,7 +84,7 @@ class MyOrdersPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Icon(Icons.arrow_forward_ios_rounded),
+                const Icon(Icons.arrow_forward_ios_rounded),
               ],
             ),
           ),

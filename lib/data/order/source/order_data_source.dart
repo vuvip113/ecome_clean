@@ -10,6 +10,7 @@ abstract class OrderDataSource {
   Future<List<ProductOrderModel>> getCartProducts();
   Future<void> orderRegistration(OrderModel order);
   Future<void> removeFromCart(String orderId);
+  Future<List<OrderModel>> getOrders();
 }
 
 class OrderDataSourceImpl implements OrderDataSource {
@@ -136,6 +137,30 @@ class OrderDataSourceImpl implements OrderDataSource {
     } catch (e) {
       throw ServerException(
         massage: 'Failed to remove from cart: $e',
+        statusCode: 400,
+      );
+    }
+  }
+
+  @override
+  Future<List<OrderModel>> getOrders() async {
+    try {
+      final user = _auth.currentUser;
+      final docRef = await _firestore
+          .collection('Users')
+          .doc(user!.uid)
+          .collection('Orders')
+          .orderBy('createdDate', descending: true)
+          .get();
+
+      final List<OrderModel> orders = docRef.docs.map((doc) {
+        return OrderModel.fromMap(doc.data());
+      }).toList();
+
+      return orders;
+    } catch (e) {
+      throw ServerException(
+        massage: 'Failed to get Orders: $e',
         statusCode: 400,
       );
     }

@@ -133,4 +133,5 @@ class ProductOrderModel extends ProductOrderEntity {
       totalPrice: totalPrice,
     );
   }
+
 }

@@ -31,4 +31,12 @@ class OrderStatusModel extends OrderStatusEntity {
       'title': title,
     };
   }
+
+  OrderStatusEntity toEntity() {
+    return OrderStatusEntity(
+      title: title,
+      createdDate: createdDate,
+      done: done,
+    );
+  }
 }

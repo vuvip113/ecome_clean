@@ -15,7 +15,7 @@ class OrderRepoImpl implements OrderRepo {
   OrderRepoImpl({required OrderDataSource orderDataSource})
     : _orderDataSource = orderDataSource;
   @override
-  ResultFuture<void> addToCart(ProductOrderEntity  order) async {
+  ResultFuture<void> addToCart(ProductOrderEntity order) async {
     try {
       final orderModel = ProductOrderModel.fromEntity(order);
 
@@ -61,11 +61,26 @@ class OrderRepoImpl implements OrderRepo {
   }
 
   @override
-  ResultFuture<void> orderRegistration(OrderEntity  order) async {
+  ResultFuture<void> orderRegistration(OrderEntity order) async {
     try {
-     final model = OrderModel.fromEntity(order);
+      final model = OrderModel.fromEntity(order);
       await _orderDataSource.orderRegistration(model);
       return const Right(null);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
+    } catch (e) {
+      return Left(
+        ServerFailure(message: 'Unexpected error: $e', statusCode: 500),
+      );
+    }
+  }
+
+  @override
+  ResultFuture<List<OrderEntity>> getOrders() async {
+    try {
+      final models = await _orderDataSource.getOrders();
+      final entities = models.map((m) => m.toEntity()).toList();
+      return Right(entities);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.massage, statusCode: e.statusCode));
     } catch (e) {

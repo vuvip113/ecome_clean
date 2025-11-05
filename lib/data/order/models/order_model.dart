@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecome_clean/data/order/models/order_status_model.dart';
 import 'package:ecome_clean/data/order/models/product_order_model.dart';
 import 'package:ecome_clean/domain/order/entities/order_entity.dart';
+import 'package:ecome_clean/domain/order/entities/order_status_entity.dart';
 
 class OrderModel extends OrderEntity {
   const OrderModel({
@@ -126,6 +127,23 @@ class OrderModel extends OrderEntity {
       products: products ?? this.products,
       shippingAddress: shippingAddress ?? this.shippingAddress,
       totalAmount: totalAmount ?? this.totalAmount,
+    );
+  }
+
+  OrderEntity toEntity() {
+    return OrderEntity(
+      code: code,
+      createdDate: createdDate,
+      itemCount: itemCount,
+      orderId: orderId,
+      orderStatus: orderStatus
+          .map((status) => (status as OrderStatusModel).toEntity())
+          .toList(),
+      products: products
+          .map((product) => (product as ProductOrderModel).toEntity())
+          .toList(),
+      shippingAddress: shippingAddress,
+      totalAmount: totalAmount,
     );
   }
 }
